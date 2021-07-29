@@ -1,0 +1,11 @@
+<div [formGroup]="form" class="px-1">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>{{ label }}</mat-label>
+        <input [type]="type" matInput 
+               [formControlName]="field"
+               [placeholder]="placeholder">
+        <mat-error *ngIf="form.get(field)?.hasError('required')">
+          Campo <strong>requerido</strong>
+        </mat-error>
+    </mat-form-field>
+</div>

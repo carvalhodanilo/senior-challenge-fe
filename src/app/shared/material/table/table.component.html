@@ -1,0 +1,34 @@
+<mat-card class="m-1">
+    <!-- <div class="spinner-container" *ngIf="loading$ | async">
+        <mat-spinner></mat-spinner>
+    </div> -->
+    <mat-table class="mat-elevation-z8" [dataSource]="table" matSort matSortActive="id"
+        matSortDirection="asc" matSortDisableClear>
+
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
+            <mat-cell *matCellDef="let dataRow">{{dataRow.id}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="nome">
+            <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+            <mat-cell class="description-cell" *matCellDef="let dataRow">{{dataRow.nome}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cpf">
+            <mat-header-cell *matHeaderCellDef>CPF</mat-header-cell>
+            <mat-cell class="duration-cell" *matCellDef="let dataRow">{{dataRow.cpf}}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: displayedColumns" class="row-link" (click)="onClickRow(row)"></mat-row>
+
+    </mat-table>
+    <mat-paginator #paginator class="mat-elevation-z8" 
+                    [length]="pager?.total" 
+                    [pageSize]="pager?.size" 
+                    [pageSizeOptions]="[3, 5, 10]"
+                    (page)="onPaginate($event)">
+    </mat-paginator>
+</mat-card>
