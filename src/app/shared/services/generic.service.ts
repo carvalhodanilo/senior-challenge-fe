@@ -5,13 +5,14 @@ import { filter, map } from 'rxjs/operators';
 import { Pessoa } from '../models/pessoa.model';
 import { HttpParamsUtils } from '../utils/http-client.utils';
 import { TablePagination } from '../utils/table-pagination.model';
+import { environment } from './../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GenericService {
 
-  private API = "http://localhost:8080/api";
+  private API = environment.host;
   constructor(private httpClient: HttpClient) { }
 
   public getWithFiltersAndPAgination(pagination: TablePagination, endPoint: string, filters?: any): Observable<any> {
