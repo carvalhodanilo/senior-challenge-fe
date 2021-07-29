@@ -1,0 +1,34 @@
+<div>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button>
+        <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+      </button>
+      <h1>Bivago</h1>
+      <span class="menu-spacer"></span>
+      <div>
+        <a mat-button [routerLink]="'/pessoas'"> Clientes </a>
+        <a mat-button [routerLink]="'/quartos'"> Quartos </a>
+        <a mat-button [routerLink]="'/movimentacao'"> Movimentação </a>
+      </div>
+    </mat-toolbar-row>
+    </mat-toolbar>
+
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav>
+      <mat-nav-list>
+
+        <a mat-list-item [routerLink]="['/pessoas']"> Clientes </a>
+        <a mat-list-item [routerLink]="'/quartos'"> Quartos </a>
+        <a mat-list-item [routerLink]="'/movimentacao'"> Movimentação </a>
+        <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item>Fechar</a>
+  
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div style="height: 88vh;">  
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
