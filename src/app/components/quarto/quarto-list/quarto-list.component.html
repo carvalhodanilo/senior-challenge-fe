@@ -1,0 +1,10 @@
+<app-page-title [title]="'Quartos Disponíveis'"></app-page-title>
+<mat-card class="m-1 d-flex justify-content-between" *ngIf="quartos?.length">
+    <button mat-fab color="primary">
+        <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <app-quarto-card *ngFor="let quarto of quartos" [quarto]="quarto"></app-quarto-card>
+    <button mat-fab color="primary">
+        <mat-icon>arrow_forward_ios</mat-icon>
+    </button>
+</mat-card>
