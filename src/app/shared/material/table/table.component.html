@@ -15,6 +15,27 @@
             <mat-cell class="description-cell" *matCellDef="let dataRow">{{dataRow.nome}}</mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="pessoa">
+            <mat-header-cell *matHeaderCellDef>Hóspede</mat-header-cell>
+            <mat-cell class="description-cell" *matCellDef="let dataRow">{{dataRow?.pessoa?.nome}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="quarto">
+            <mat-header-cell *matHeaderCellDef>Número do quarto</mat-header-cell>
+            <mat-cell class="description-cell" *matCellDef="let dataRow">{{dataRow?.quarto?.nome}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="closed">
+            <mat-header-cell *matHeaderCellDef>Check-out</mat-header-cell>
+            <mat-cell class="description-cell" *matCellDef="let dataRow">{{dataRow?.closed}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="valorTotal">
+            <mat-header-cell *matHeaderCellDef>Valor total / atual</mat-header-cell>
+            <mat-cell class="description-cell" *matCellDef="let dataRow">{{dataRow?.valorTotal}}</mat-cell>
+        </ng-container>
+
+
         <ng-container matColumnDef="cpf">
             <mat-header-cell *matHeaderCellDef>CPF</mat-header-cell>
             <mat-cell class="duration-cell" *matCellDef="let dataRow">{{dataRow.cpf}}</mat-cell>
@@ -22,8 +43,11 @@
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 
-        <mat-row *matRowDef="let row; columns: displayedColumns" class="row-link" (click)="onClickRow(row)"></mat-row>
-
+        <mat-row *matRowDef="let row; columns: displayedColumns" 
+                  class="row-link" 
+                  [class.row-is-clicked]="item?.id == row.id && type === 'select'"
+                  (click)="onClickRow(row)">
+        </mat-row>
     </mat-table>
     <mat-paginator #paginator class="mat-elevation-z8" 
                     [length]="pager?.total" 

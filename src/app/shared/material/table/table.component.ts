@@ -18,6 +18,7 @@ export class TableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
   @Input() displayedColumns!: string[];
+  @Input() type!: string;
   @Input() service!: string;
 
   @Output() eventRow = new EventEmitter<any>();
@@ -27,6 +28,7 @@ export class TableComponent implements OnInit, AfterViewInit {
   public table = new MatTableDataSource<any>();
   public pager!: TablePagination;
   public filters!: any;
+  public item: any;
 
   constructor(private genericService: GenericService) { }
   
@@ -50,9 +52,11 @@ export class TableComponent implements OnInit, AfterViewInit {
   onSearch(): void {
     this.loadingSubject.next(true);
     this.genericService.getWithFiltersAndPAgination(this.pager, this.service, this.filters).subscribe(resp =>{
-      console.log(resp)
       if(resp && resp['content']) { this.table.data = [...resp['content']]; }
       if(this.pager.page === 0){ this.pager.total = resp['totalElements']; }
+      console.log(this.table)
+      console.log(this.table.data)
+
       this.loadingSubject.next(false);
     })
   }
@@ -64,6 +68,7 @@ export class TableComponent implements OnInit, AfterViewInit {
   }
 
   onClickRow(row: any){
+    if (this.type === 'select'){ this.item = row; }
     this.eventRow.emit(row);
   }
 }

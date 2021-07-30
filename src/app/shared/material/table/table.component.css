@@ -41,3 +41,8 @@
     background-color: rgba(0, 0, 0, .05);
     cursor: pointer;
   }
+
+.row-is-clicked {
+    font-weight: bold;
+    background-color: rgb(219, 219, 212);
+}
