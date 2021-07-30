@@ -9,9 +9,13 @@ const routes: Routes = [
 		path: 'pessoas',
 		loadChildren: () => import('./components/pessoa/pessoa.module').then(m => m.PessoaModule)
 	},
-  {
+    {
 		path: 'quartos',
 		loadChildren: () => import('./components/quarto/quarto.module').then(m => m.QuartoModule)
+	},
+	{
+		path: 'movimentacao',
+		loadChildren: () => import('./components/movimentacao/movimentacao.module').then(m => m.MovimentacaoModule)
 	},
 ];
 

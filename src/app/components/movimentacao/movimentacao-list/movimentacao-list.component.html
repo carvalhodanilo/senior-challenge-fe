@@ -1,0 +1,23 @@
+<app-page-title [actionsList]="actions" [title]="'Movimentação de Pessoas'" (onClickAction)="onClickAction($event)"></app-page-title>
+<mat-card class="m-1">
+  <div>
+    <form [formGroup]="form" class="example-form">
+      <div class="form-row d-flex">
+        <div class="col-md-6">     
+          <app-input [field]="'nome'" [label]="'Nome'" [form]="form" [placeholder]="'Nome'"></app-input>
+        </div>
+        <div class="col-md-6">     
+          <app-input [field]="'cpf'" [label]="'CPF'" [form]="form" [placeholder]="'CPF'"></app-input>   
+        </div>
+      </div>
+      <div class="row d-flex justify-content-end">
+        <div class="col-md-2">     
+          <button class="actions" mat-raised-button color="primary" (click)="onSubmit(table)">Buscar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</mat-card>
+
+<app-table #table [service]="service" [displayedColumns]="displayedColumns" (eventRow)="navigateToView($event)"></app-table>
+
