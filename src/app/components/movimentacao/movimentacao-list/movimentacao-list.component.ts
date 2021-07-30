@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { mappingUrls } from 'src/app/shared/constants/constants';
 import { DialogComponent } from 'src/app/shared/material/dialog/dialog.component';
@@ -28,6 +29,7 @@ export class MovimentacaoListComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
+              private _snackBar: MatSnackBar,
               private genericService: GenericService,
               public dialog: MatDialog) { }
 
@@ -70,10 +72,19 @@ export class MovimentacaoListComponent implements OnInit {
         movimentacao.closed = true;
               
         this.genericService.edit(movimentacao, this.service).subscribe(res =>{
-          // this.openSnackBar("Quarto locado!", "Sucesso!");
+          this.openSnackBar("Check-out realizado!", "Sucesso!");
           this.router.navigate(['/home']);
         })
       }   
+    });
+  }
+
+  
+  public openSnackBar(message: string, status: string): void {
+    this._snackBar.open(message, status, {
+      horizontalPosition: 'end', 
+      verticalPosition: 'top',
+      duration: 2000,
     });
   }
 }

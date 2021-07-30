@@ -64,7 +64,7 @@ export class QuartoListComponent implements OnInit {
       
       this.genericService.save(this.mov, this.movimentacaoService).subscribe(res =>{
         this.openSnackBar("Quarto locado!", "Sucesso!");
-        this.router.navigate(['/pessoas']);
+        this.router.navigate(['/movimentacao']);
       })
 
     });
