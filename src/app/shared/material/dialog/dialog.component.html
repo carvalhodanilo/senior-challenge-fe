@@ -27,7 +27,7 @@
             (eventRow)="onClickRow($event)">
         </app-table>
     </div>
-    <div mat-dialog-actions>
+    <div class="d-flex justify-content-end" mat-dialog-actions>
         <button mat-button (click)="onNoClick()">Cancelar</button>
         <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
     </div>
@@ -35,8 +35,62 @@
 <div *ngIf="type === 'confirm'">
     <h1 mat-dialog-title>Confirmar</h1>
     <div mat-dialog-content>Desaja incluir garagem ?</div>
-    <div mat-dialog-actions>
+    <div class="d-flex justify-content-end" mat-dialog-actions>
         <button mat-button (click)="onNoClick()">Não</button>
         <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Sim</button>
+    </div>
+</div>
+
+<div *ngIf="type === 'check-out'">
+    <h1 mat-dialog-title>Check-out</h1>
+    <div mat-dialog-content>
+        <div>
+            <form [formGroup]="form" class="example-form">
+                <div class="form-row d-flex">
+                    <div class="col-md-12 col-sm-12">
+                        <app-input [hidden]="true" [field]="'id'" [form]="form"></app-input>
+                    </div>
+                </div>
+
+                <div class="form-row d-flex">
+                    <div class="col-md-12 col-sm-12">
+                        <app-input [field]="'pessoa'" [label]="'Hóspede'" [form]="form" [placeholder]="'Hóspede'"></app-input>
+                    </div>
+                </div>
+                <div class="form-row d-flex">
+                    <div class="col-md-6 col-sm-12">
+                        <app-input [field]="'cpf'" [label]="'CPF'" [form]="form" [placeholder]="'CPF'"></app-input>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <app-input [field]="'telefone'" [label]="'Telefone'" [form]="form" [placeholder]="'Telefone'"></app-input>
+                    </div>
+                </div>
+                <div class="form-row d-flex">
+                    <div class="col-md-6 col-sm-12">
+                        <app-input [field]="'garagem'" [label]="'Garagem'" [form]="form" [placeholder]="'Garagem'"></app-input>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <app-input [field]="'quarto'" [label]="'Quarto'" [form]="form" [placeholder]="'Quarto'"></app-input>
+                    </div>
+                </div>
+                <div class="form-row d-flex">
+                    <div class="col-md-6 col-sm-12">
+                        <app-input [field]="'entrada'" [label]="'Entrada'" [form]="form" [placeholder]="'Entrada'"></app-input>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <app-input [field]="'saida'" [label]="'Saida'" [form]="form" [placeholder]="'Saida'"></app-input>
+                    </div>
+                </div>
+                <div class="form-row d-flex">
+                    <div class="col-md-12 col-sm-12">
+                        <app-input [field]="'valorTotal'" [label]="'Valor Total'" [form]="form" [placeholder]="'Valor Total'"></app-input>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="d-flex justify-content-end" mat-dialog-actions *ngIf="row?.closed == false">
+        <button mat-button (click)="onNoClick()">Cancelar</button>
+        <button mat-button [mat-dialog-close]="row" cdkFocusInitial>Finalizar</button>
     </div>
 </div>

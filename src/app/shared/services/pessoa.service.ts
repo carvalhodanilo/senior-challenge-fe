@@ -27,7 +27,6 @@ export class PessoaService {
   }
 
   private mappingPersons(resp: any): Pessoa[] {
-    console.log(resp)
     let pessoa: Pessoa[] = new Array<Pessoa>();
     return pessoa;
   }

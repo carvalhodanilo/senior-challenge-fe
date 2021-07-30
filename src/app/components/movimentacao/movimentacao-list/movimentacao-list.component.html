@@ -1,4 +1,4 @@
-<app-page-title [actionsList]="actions" [title]="'Movimentação de Pessoas'" (onClickAction)="onClickAction($event)"></app-page-title>
+<app-page-title [actionsList]="actions" [title]="'Movimentação de Pessoas'"></app-page-title>
 <mat-card class="m-1">
   <div>
     <form [formGroup]="form" class="example-form">
@@ -19,5 +19,5 @@
   </div>
 </mat-card>
 
-<app-table #table [service]="service" [displayedColumns]="displayedColumns" (eventRow)="navigateToView($event)"></app-table>
+<app-table #table [service]="service" [displayedColumns]="displayedColumns" (eventRow)="onClickRow($event)"></app-table>
 

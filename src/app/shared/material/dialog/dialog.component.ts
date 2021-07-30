@@ -2,6 +2,7 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { mappingUrls } from '../../constants/constants';
+import { Movimentacao } from '../../models/movimentacao.model';
 import { Pessoa } from '../../models/pessoa.model';
 import { TableComponent } from '../table/table.component';
 
@@ -18,7 +19,8 @@ export class DialogComponent implements OnInit {
   public form!: FormGroup;
   public submitted = false;
   public type!: string;
-  
+  public row!: any;
+
   public displayedColumns = ["id", "nome", "cpf"];
   public service = mappingUrls.pessoaService.context;
   
@@ -28,12 +30,30 @@ export class DialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.type = this.data?.type;
+    this.row = new Movimentacao(this.data?.row);
+    if(!this.row.saida) { this.row.saida = new Date(); }
+    this.buildForm();
+  }
 
-    this.form = this.formBuilder.group({
-      nome: ['', []],
-      cpf: ['', []],
-      telefone: ['', []]
-    });
+  buildForm(){
+    let fields = {};
+    if(this.type == 'search') { 
+      fields = { nome: ['', []],  cpf: ['', []], telefone: ['', []] }
+    }
+    if(this.type == 'check-out') { 
+      fields = { 
+        pessoa: [{ value: this.row.pessoa.nome, disabled: true}, []],  
+        telefone: [{ value: this.row.pessoa.telefone, disabled: true}, []], 
+        cpf: [{ value: this.row.pessoa.cpf, disabled: true}, []], 
+        garagem: [{ value: this.row.garagem, disabled: true}, []],
+        quarto: [{ value: this.row.quarto.nome, disabled: true}, []],
+        entrada: [{ value: this.row.entrada, disabled: true}, []],
+        saida: [{ value: this.row.saida, disabled: true}, []],
+        valorTotal: [{ value: this.row.valorTotal, disabled: true}, []],
+        id: [{ value: this.row.id, disabled: true}, []],
+      }
+    }
+    this.form = this.formBuilder.group(fields);
   }
 
   onNoClick(): void {
@@ -42,11 +62,7 @@ export class DialogComponent implements OnInit {
 
   onSubmit(tableRef: TableComponent): void {
     this.submitted = true;
-
-    console.log(new Pessoa(this.form.value))
     tableRef.externalSearch(new Pessoa(this.form.value));
-
-    console.log(JSON.stringify(this.form.value, null, 2));
   }
 
   onReset(): void {

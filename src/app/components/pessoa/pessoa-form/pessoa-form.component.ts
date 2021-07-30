@@ -121,8 +121,8 @@ export class PessoaFormComponent implements OnInit {
 
   public delete():void {
     this.genericService.delete(this.service, this.pessoa.id).subscribe(res => {
-      console.log(res)
-    })
+      this.openSnackBar('Registro excluido.', 'Sucesso!');
+      this.router.navigate([`/pessoas`]);    })
   }
 
   public openSnackBar(message: string, status: string): void {

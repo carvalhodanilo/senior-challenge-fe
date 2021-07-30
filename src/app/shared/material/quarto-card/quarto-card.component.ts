@@ -31,9 +31,10 @@ export class QuartoCardComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.hospede = result;
-      this.emit();
+      if(result){
+        this.hospede = result;
+        this.emit();
+      }      
     });
   }
 

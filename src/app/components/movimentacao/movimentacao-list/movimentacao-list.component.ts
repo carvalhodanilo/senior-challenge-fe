@@ -1,9 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { mappingUrls } from 'src/app/shared/constants/constants';
+import { DialogComponent } from 'src/app/shared/material/dialog/dialog.component';
 import { TableComponent } from 'src/app/shared/material/table/table.component';
+import { Movimentacao } from 'src/app/shared/models/movimentacao.model';
 import { Pessoa } from 'src/app/shared/models/pessoa.model';
+import { GenericService } from 'src/app/shared/services/generic.service';
 import { PessoaService } from 'src/app/shared/services/pessoa.service';
 
 @Component({
@@ -18,12 +22,14 @@ export class MovimentacaoListComponent implements OnInit {
   form!: FormGroup;
   submitted = false;
 
-  public displayedColumns = ["pessoa", "quarto", "valorTotal", "closed"];
+  public displayedColumns = ["pessoa", "quarto", "valorTotal", "garagem", "closed"];
   public actions!: any[];
   public service = mappingUrls.movimentacaoService.context;
 
   constructor(private formBuilder: FormBuilder,
-              private router: Router) { }
+              private router: Router,
+              private genericService: GenericService,
+              public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -48,15 +54,26 @@ export class MovimentacaoListComponent implements OnInit {
     this.form.reset();
   }
 
-  public navigateToView(row: any): void{
-    this.router.navigate([`/pessoas/visualizar/${row.id}`]);
+  public onClickRow(row: any): void{
+      this.openDialogCheckout(row);
   }
 
-  public onClickAction(event: any): void {
-    switch (event.action){
-      case 'add':
-        this.router.navigate([`/pessoas/novo`]);
-        break;
-    }
+  openDialogCheckout(row: any): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: { type: 'check-out', row}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const movimentacao = new Movimentacao(result);
+        movimentacao.closed = true;
+              
+        this.genericService.edit(movimentacao, this.service).subscribe(res =>{
+          // this.openSnackBar("Quarto locado!", "Sucesso!");
+          this.router.navigate(['/home']);
+        })
+      }   
+    });
   }
 }

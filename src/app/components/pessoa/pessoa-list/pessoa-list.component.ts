@@ -45,11 +45,7 @@ export class PessoaListComponent implements OnInit {
 
   onSubmit(tableRef: TableComponent): void {
     this.submitted = true;
-
-    console.log(new Pessoa(this.form.value))
-    tableRef.externalSearch(new Pessoa(this.form.value));
-
-    console.log(JSON.stringify(this.form.value, null, 2));
+    tableRef.externalSearch(new Pessoa(this.form.value)); 
   }
 
   onReset(): void {

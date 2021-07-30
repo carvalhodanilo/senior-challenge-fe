@@ -54,9 +54,6 @@ export class TableComponent implements OnInit, AfterViewInit {
     this.genericService.getWithFiltersAndPAgination(this.pager, this.service, this.filters).subscribe(resp =>{
       if(resp && resp['content']) { this.table.data = [...resp['content']]; }
       if(this.pager.page === 0){ this.pager.total = resp['totalElements']; }
-      console.log(this.table)
-      console.log(this.table.data)
-
       this.loadingSubject.next(false);
     })
   }

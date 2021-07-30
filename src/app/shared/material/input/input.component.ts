@@ -20,7 +20,6 @@ export class InputComponent implements OnInit {
 
   ngOnInit(): void {
     this.ref.detectChanges();
-    console.log(this.form)
   }
 
 }

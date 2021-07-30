@@ -36,7 +36,6 @@ export class GenericService {
   }
 
   public edit(entity: any, endPoint: string): Observable<any> {
-    console.log(entity)
     return this.httpClient.put(`${this.API}/${endPoint}/${entity.id}`, entity).pipe(
       map(resp => this.mappingData(resp))
     );
