@@ -40,6 +40,7 @@ export class QuartoListComponent implements OnInit {
   public getQuartos(): void {
     this.genericService.getWithFiltersAndPAgination(this.pager, this.service).subscribe(res => {
       if(res['content'] && res['content'].length){
+        this.pager.total = res['totalPages']
         this.quartos = res['content'].map((quarto: any) => quarto as Quarto)
       }
     })
@@ -68,5 +69,17 @@ export class QuartoListComponent implements OnInit {
       })
 
     });
+  }
+
+  public paginate(action: string): void {
+    switch (action){
+      case 'prev':
+        if(this.pager.page > 0 ) { this.pager.page--; }
+        break;
+      case 'next': 
+        if(this.pager.page < 3 ) { this.pager.page++; }
+        break;
+    }
+    this.getQuartos();
   }
 }
