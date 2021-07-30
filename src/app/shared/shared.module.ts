@@ -16,6 +16,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 //Components
 import { ToolbarComponent } from './material/toolbar/toolbar.component';
@@ -25,6 +26,7 @@ import { PageTitleComponent } from './material/page-title/page-title.component';
 import { InputComponent } from './material/input/input.component';
 import { TableComponent } from './material/table/table.component';
 import { QuartoCardComponent } from './material/quarto-card/quarto-card.component';
+import { DialogComponent } from './material/dialog/dialog.component';
 
 @NgModule({
     imports: [
@@ -43,7 +45,8 @@ import { QuartoCardComponent } from './material/quarto-card/quarto-card.componen
         MatPaginatorModule,
         MatSortModule,
         MatProgressSpinnerModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatDialogModule
      ],
     declarations: [
         ToolbarComponent,
@@ -52,7 +55,8 @@ import { QuartoCardComponent } from './material/quarto-card/quarto-card.componen
         PageTitleComponent,
         InputComponent,
         TableComponent,
-        QuartoCardComponent
+        QuartoCardComponent,
+        DialogComponent
     ],
     exports: [
         ToolbarComponent,
@@ -61,7 +65,8 @@ import { QuartoCardComponent } from './material/quarto-card/quarto-card.componen
         ButtonComponent,
         PageTitleComponent,
         TableComponent,
-        QuartoCardComponent
+        QuartoCardComponent,
+        DialogComponent
     ]
 })
 export class SharedModule {}

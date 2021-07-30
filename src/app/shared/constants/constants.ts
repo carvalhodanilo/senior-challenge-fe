@@ -4,5 +4,8 @@ export const mappingUrls = {
     },
     quartoService: {
         context: 'quartos'
+    },
+    movimentacaoService: {
+        context: 'movimentacoes'
     }
 }
