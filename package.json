@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-postbuild": "ng build --prod"
+    "heroku-postbuild": "ng build --prod",
+    "compodoc": "./node_modules/.bin/compodoc -p src/tsconfig.json"
   },
   "engines": {
     "node": "14.x",

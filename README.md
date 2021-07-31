@@ -1,5 +1,11 @@
 # SeniorChallengeFe
 
+*** Para documentação completa, digitar o seguinte comando:
+>compodoc -s -r 8181
+
+Ela estará disponível em:
+>http://127.0.0.1:8181
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.3.
 
 ## Development server
